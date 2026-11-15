@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>E-commerce</title>
+    <style>
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        .header {
+            background: #053827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            .header h1 { font-size: 1.8rem; }
+        .header p { opacity: 0.9; }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+    }
+        .ofertas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .produto {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .produto:hover { transform: translateY(-4px); }
+        .produto img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .produto-info {
+            padding: 16px;
+        }
+        .produto h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .preco {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #16a34a;
+            margin-bottom: 8px;
+        }
+        .preco span {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-decoration:line-through;
+            margin-left:8px;
+        }
+        .btn-comprar {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 12px;
+        }
+        .btn-comprar:hover { background: #1d4ed8; }
+        .btn-comprar:active { transform: scale(0.98); }
+        .desconto {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ef4444;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .parcelamento {
+            font-size: 0.85rem;
+            color: #16a34a;
+            margin-top: 4px;
+        }
+        .produto {
+            position: relative;
+        }
+
+            body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #308568, #bdf3e2);
+      color: #fff;
+    }
+
+        /* ===== NAVBAR PÍLULA ===== */
+    .navbar-pill {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(94%, 1000px);
+      padding: 8px 8px 8px 22px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      z-index: 1030;
+    }
+    .navbar-pill .container-fluid { padding: 0; }
+    .navbar-pill .navbar-brand { font-weight: 800; letter-spacing: -0.02em; }
+    .navbar-pill .nav-link { opacity: 0.9; }
+    .navbar-pill .nav-link:hover,
+    .navbar-pill .nav-link.active { opacity: 1; }
+    .navbar-pill .navbar-toggler { border: 0; }
+    .navbar-pill .navbar-toggler:focus { box-shadow: none; }
+
+    .navbar-pill .form-control { border-radius: 999px; border: 0; }
+    .navbar-pill .btn-buscar {
+      background: #fff;
+      color: #146c43;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 18px;
+    }
+    .navbar-pill .btn-buscar:hover { transform: scale(1.05); }
+
+    @media (max-width: 991.98px) {
+      .navbar-pill { border-radius: 28px; padding: 8px 12px 8px 20px; }
+      .navbar-pill form { padding: 8px 0 6px; }
+    }
+
+    main { padding: 140px 24px 0; }
+  </style>
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-pill">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Healthy Healing</a>
+
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="plano-saude.html">Plano</a>
+        </li>
+      </ul>
+
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Pesquisar">
+        <button class="btn btn-buscar" type="submit">Buscar</button>
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+<main>
+</main>
+
+
+    <div class="header">
+        <h1>Ofertas Imperdíveis!</h1>
+        <p>Aproveite nossas ofertas especiais com até 50% OFF</p>
+    </div>
+<div class="alert alert-success text-center" role="alert">
+    <h3>Descontos apenas para clientes Healthy Healing</h3>
+</div>
+    <div class="container">
+        <div class="ofertas-grid">
+            <div class="produto">
+                <div class="desconto">-77%</div>
+                <img src="loja/prote.neutro.jpg" alt="protetor solar - neutrogena">
+                <div class="produto-info">
+                    <h3>Protetor solar neutrogena - Sun Fresh</h3>
+                    <p class="preco">R$ 29,99 <span>R$ 131,52</span></p>
+                    <button class="btn-comprar">Ver oferta</button>
+                </div>
+            </div>
+            <div class="produto">
+                <div class="desconto">-50%</div>
+                <img src="loja/buscofen-400g.jpg" alt="buscofen - 400g">
+                <div class="produto-info">
+                    <h3>Buscofen 400g - 10 capisulas</h3>
+                    <p class="preco">R$ 9,99 <span>R$ 19,99</span></p>
+                    <button class="btn-comprar">Ver oferta</button>
+                </div>
+            </div>
+            <div class="produto">
+                <div class="desconto">-80%</div>
+                <img src="loja/fralda.huggies.jpg" alt="ah sei la">
+                <div class="produto-info">
+                    <h3>Fralda Huggies Protect</h3>
+                    <p class="preco">R$ 39,99 <span>R$ 199,99</span></p>
+                    <button class="btn-comprar">Ver oferta</button>
+                </div>
+            </div>
+            <div class="produto">
+                <div class="desconto">-60%</div>
+                <img src="loja/kit-johnjohn.jpg" alt="concordo">
+                <div class="produto-info">
+                    <h3>Kit Sabonete Liquido Johnson`s Baby - 400ml</h3>
+                    <p class="preco">R$ 19,99 <span>R$ 49,99</span></p>
+                    <button class="btn-comprar" href="store.html" >Ver oferta</button>
+                </div>
+        </div>
+    </div>
+    <br>
+    <div class="bg-success p-2 text-center" style="--bs-bg-opacity: .5;">Pagamentos
+    <h5 class="mt-0">Aceitamos PIX, Cartão (Debito e Credito)e Vouchers</h5>
+    <p>O reembolso será feito em 24horas ou estornado na fatura do Cartão</p>
+  </div>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Health Healing</title>
+</head>
+<style>
+  .service-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .service-content {
+    padding: 24px;
+    text-align: center;
+  }
+
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+
+    margin-top: -48px;
+    margin-bottom: 15px;
+
+    background: #0d6efd;
+    border: 4px solid #fff;
+    border-radius: 50%;
+
+    font-size: 22px;
+  }
+
+  .service-content h4 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #212529;
+  }
+
+  .service-content p {
+    color: #6c757d;
+    min-height: 48px;
+    margin-bottom: 20px;
+  }
+
+  .service-content .btn {
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+  }
+      body {
+      font-family: "Nunito", system-ui, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #308568, #bdf3e2) fixed;
+      color: #fff;
+    }
+
+    /* ===== NAVBAR PÍLULA ===== */
+    .navbar-pill {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(94%, 1000px);
+      padding: 8px 8px 8px 22px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      z-index: 1030;
+    }
+    .navbar-pill .container-fluid { padding: 0; }
+    .navbar-pill .navbar-brand { font-weight: 800; letter-spacing: -0.02em; }
+    .navbar-pill .nav-link { opacity: 0.9; font-weight: 600; }
+    .navbar-pill .nav-link:hover,
+    .navbar-pill .nav-link.active { opacity: 1; }
+    .navbar-pill .navbar-toggler { border: 0; }
+    .navbar-pill .navbar-toggler:focus { box-shadow: none; }
+    .navbar-pill .form-control { border-radius: 999px; border: 0; }
+    .navbar-pill .btn-buscar {
+      background: #fff;
+      color: var(--verde-escuro);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 6px 18px;
+      transition: transform .2s ease;
+    }
+    .navbar-pill .btn-buscar:hover { transform: scale(1.05); }
+
+    @media (max-width: 991.98px) {
+      .navbar-pill { border-radius: 28px; padding: 8px 12px 8px 20px; }
+      .navbar-pill form { padding: 8px 0 6px; }
+    }
+
+</style>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-pill">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Healthy Healing</a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Início</a>
+          </li>
+          <li class="nav-item" data-logado hidden>
+            <a class="nav-link" href="/perfil">Meu perfil</a>
+          </li>
+          <li class="nav-item" data-visitante>
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item" data-visitante>
+            <a class="nav-link" href="/cadastro">Cadastro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="plano-saude.html">Plano</a>
+          </li>
+        </ul>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+          <button class="btn btn-buscar" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+  <!-- passagem e indica -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+      class="active" aria-current="true" aria-label="Slide 1"></button>
+
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+      aria-label="Slide 2"></button>
+
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+      aria-label="Slide 3"></button>
+
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+      aria-label="Slide 4"></button>
+
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+      aria-label="Slide 5"></button>
+  </div>
+
+  <!-- banners -->
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="h&h-banner.jpg" class="d-block w-100" alt="Banner H&H">
+    </div>
+
+    <div class="carousel-item">
+      <img src="nutri-banner.png" class="d-block w-100" alt="Banner Nutrição">
+    </div>
+
+    <div class="carousel-item">
+      <img src="fono-banner.png" class="d-block w-100" alt="Banner Fonoaudiologia">
+    </div>
+
+    <div class="carousel-item">
+      <img src="fisio-banner.png" class="d-block w-100" alt="Banner Fisioterapia">
+    </div>
+
+    <div class="carousel-item">
+      <img src="psico-banner.png" class="d-block w-100" alt="Banner Psicologia">
+    </div>
+
+  </div>
+
+  <!-- passar banner -->
+  <button class="carousel-control-prev" type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev">
+
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+
+  <button class="carousel-control-next" type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next">
+
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Próximo</span>
+  </button>
+
+</div>
+<!-- modal pika -->
+<button 
+type="button" 
+class="btn btn-primary w-100"
+data-bs-toggle="modal" 
+data-bs-target="#exampleModal">
+
+Conheça nossos profissionais
+</button>
+
+<!-- dentro do modal pika-->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+     aria-labelledby="profissionaisTitulo" aria-hidden="true">
+
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content profissionais-modal">
+
+      <!-- Cabeçalho -->
+      <div class="modal-header profissionais-header">
+        <div>
+          <span class="modal-subtitle">NOSSA EQUIPE</span>
+          <h5 class="modal-title" id="profissionaisTitulo">
+            Nossos profissionais
+          </h5>
+          <p>Conheça os especialistas disponíveis para você.</p>
+        </div>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar">
+        </button>
+      </div>
+
+      <!-- Conteúdo -->
+      <div class="modal-body profissionais-body">
+
+        <div class="row g-3">
+
+          <!-- Fisioterapia -->
+          <div class="col-12 col-md-6">
+            <div class="especialidade-card">
+              <div class="especialidade-titulo">
+                <span class="especialidade-icon">🦴</span>
+                <h6>Fisioterapia</h6>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Madalena</strong>
+                  <span>@madalane_pavão</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Daniel</strong>
+                  <span>@danielSantos_</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Catarina</strong>
+                  <span>@catarinaBatista</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Renato</strong>
+                  <span>@RenatoGarcia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nutrição -->
+          <div class="col-12 col-md-6">
+            <div class="especialidade-card">
+              <div class="especialidade-titulo">
+                <span class="especialidade-icon">🥗</span>
+                <h6>Nutrição</h6>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Giovanna</strong>
+                  <span>@Giovnna_nutri</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Julianna</strong>
+                  <span>@NutriJulianna</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+
+                <div>
+                  <strong>Estela</strong>
+                  <span>@EstelaNutri</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+
+                <div>
+                  <strong>Julia</strong>
+                  <span>@JúliaAraújo_Nutri</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fonoaudiologia -->
+          <div class="col-12 col-md-6">
+            <div class="especialidade-card">
+              <div class="especialidade-titulo">
+                <span class="especialidade-icon">🗣️</span>
+                <h6>Fonoaudiologia</h6>
+              </div>
+
+              <div class="profissional-item">
+
+                <div>
+                  <strong>André</strong>
+                  <span>@MédicoAndre_fono</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+
+                <div>
+                  <strong>Eduardo</strong>
+                  <span>@Edu_Batista</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Rafael</strong>
+                  <span>@RafaelFono_</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>José</strong>
+                  <span>@JoséRibeiro_</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Psicologia -->
+          <div class="col-12 col-md-6">
+            <div class="especialidade-card">
+              <div class="especialidade-titulo">
+                <span class="especialidade-icon">🧠</span>
+                <h6>Psicologia</h6>
+              </div>
+              <div class="profissional-item">
+                <div>
+                  <strong>Roberta</strong>
+                  <span>@DoutoraRoberta_</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Daniella</strong>
+                  <span>@Daniella_Cabral</span>
+                </div>
+              </div>
+
+              <div class="profissional-item">
+                <div>
+                  <strong>Doarda</strong>
+                  <span>@DoardNunes_Psicologa</span>
+                </div>
+              </div>
+              <div class="profissional-item">
+                <div>
+                  <strong>Fernanda</strong>
+                  <span>@FeGoudard_</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <div class="modal-footer profissionais-footer">
+        <span>Encontre o profissional ideal para você.</span>
+        <button type="button" class="btn btn-primary"
+                data-bs-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<br>
+<div class="container py-5">
+
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Olá! O que você deseja fazer?</h2>
+    <p class="text-muted">
+      Acesse rapidamente os serviços disponíveis.
+    </p>
+  </div>
+
+  <div class="row justify-content-center g-4">
+
+    <!-- Card 1 -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="service-card h-100">
+        <div class="service-content">
+          <span class="service-icon">📱</span>
+          <h4>Agendar Teleconsulta</h4>
+          <p>
+            Atendimento psicológico com foco no bem-estar
+            e qualidade de vida.
+          </p>
+          <a href="select.html" class="btn btn-primary">
+            Agendar agora
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="service-card h-100">
+        <div class="service-content">
+          <span class="service-icon">📅</span>
+          <h4>Agendar Consulta</h4>
+          <p>
+            Escolha o melhor horário para realizar
+            sua consulta.
+          </p>
+          <a href="select.html" class="btn btn-primary">
+            Agendar consulta
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="service-card h-100">
+        <div class="service-content">
+          <span class="service-icon">🔎</span>
+          <h4>Agendar Exames</h4>
+          <p>
+            Avaliação e acompanhamento especializado
+            para você.
+          </p>
+          <a href="select.html" class="btn btn-primary">
+            Agendar exame
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="service-card h-100">
+        <div class="service-content">
+          <span class="service-icon">📋</span>
+          <h4>Meus Agendamentos</h4>
+          <p>
+            Consulte e acompanhe suas consultas
+            e exames agendados.
+          </p>
+          <a href="agendamentos.html" class="btn btn-primary">
+            Ver agendamentos
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="service-card h-100">
+        <div class="service-content">
+          <span class="service-icon">📄</span>
+          <h4>Resultado de Exames</h4>
+          <p>
+            Consulte seus resultados de exames
+            de forma rápida e segura.
+          </p>
+          <a href="resultados.html" class="btn btn-primary">
+            Ver resultados
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<div class="d-flex justify-content-center mt-4 px-3">
+  <div class="card border-0 shadow-sm text-center" style="max-width: 40rem; width: 100%;">
+    <div class="card-body p-5">
+      <h2 class="card-title fw-bold">Ofertas e promoções</h2>
+      <p class="card-text text-muted mb-4">Encontre os melhores produtos com preços especiais.</p>
+      <a href="store.html" class="btn btn-dark px-4 rounded-pill">Ver produtos</a>
+    </div>
+  </div>
+</div>
+<br>
+
+<br>
+<div class="alert alert-success text-center" role="alert">
+    <h3>Mais informações abaixo</h3>
+</div>
+<div class="accordion accordion-flush w-75 mx-auto mt-5 border rounded shadow-sm"
+     id="accordionFlushExample"
+     style="border-color: #d6d6d6;">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseOne">
+        🩺FISIOTERAPIA 
+      </button>
+    </h2>
+
+    <div id="flush-collapseOne"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionFlushExample">
+
+      <div class="accordion-body">
+       Se você busca alívio da dor, melhora da respiração ou recuperação de lesões, a fisioterapia<br>
+        é a solução ideal para cuidar do seu corpo de forma segura e eficiente. 🌬️ Fisioterapia Respiratória<br>
+
+Indicada para pessoas com problemas pulmonares como asma,<br>
+bronquite e infecções respiratórias.<br>
+Benefícios:<br>
+✔️ Melhora da capacidade pulmonar<br>
+✔️ Redução da falta de ar<br>
+✔️ Auxílio na eliminação de secreções<br>
+✔️ Mais disposição para as atividades do dia a dia <br>
+
+💪 Dores Crônicas<br>
+
+Tratamento especializado para dores persistentes, como<br>
+dores nas costas, cervical e condições como Fibromialgia.<br>
+Benefícios:<br>
+✔️ Alívio da dor sem necessidade de medicamentos constantes<br>
+✔️ Melhora da mobilidade e flexibilidade<br>
+✔️ Aumento da qualidade de vida<br>
+✔️ Prevenção de agravamentos<br>
+
+🦴 Traumatologia e Ortopedia<br>
+
+Recuperação completa e segura após lesões e cirurgias. Ideal para<br>
+fraturas, entorses, lesões musculares e dores na coluna.<br>
+Benefícios:<br>
+✔️ Recuperação mais rápida e eficaz<br>
+✔️ Fortalecimento muscular<br>
+✔️ Retorno seguro às atividades físicas<br>
+✔️ Prevenção de novas lesões<br>
+
+✨ Invista na sua saúde hoje mesmo!<br>
+A fisioterapia não trata apenas sintomas — ela cuida da causa, promovendo bem-estar,<br>
+ autonomia e mais qualidade de vida para você.<br>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseTwo">
+        🧠PSICOTERAPIA
+      </button>
+    </h2>
+
+    <div id="flush-collapseTwo"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionFlushExample">
+
+      <div class="accordion-body">
+        A psicoterapia é um espaço seguro para você se conhecer melhor,lidar com desafios e construir uma vida mais equilibrada e saudável.<br>
+
+❤️ Relacionamentos e Vida Profissional<br>
+
+Dificuldades nos relacionamentos ou no trabalho podem afetar diretamente seu bem-estar.<br>
+Como a psicoterapia pode ajudar:<br>
+✔️ Melhora na comunicação e nos vínculos familiares e conjugais<br>
+✔️ Resolução de conflitos no ambiente profissional<br>
+✔️ Desenvolvimento de habilidades sociais e emocionais<br>
+✔️ Mais segurança para tomar decisões importantes<br>
+
+🌱 Autoconhecimento e Emoções<br>
+
+Entender a si mesmo é o primeiro passo para evoluir.<br>
+Benefícios:<br>
+✔️ Maior clareza sobre pensamentos e comportamentos<br>
+✔️ Desenvolvimento da inteligência emocional<br>
+✔️ Fortalecimento da resiliência<br>
+✔️ Melhor controle e equilíbrio dos sentimentos<br>
+
+🧘 Saúde Mental<br>
+
+Cuidar da mente é tão importante quanto cuidar do corpo.<br>
+A psicoterapia auxilia no tratamento e alívio de sintomas relacionados a:<br>
+✔️ Estresse<br>
+✔️ Depressão<br>
+✔️ Ansiedade<br>
+✔️ Fobias<br>
+✔️ Trauma psicológico<br>
+Resultados que você pode alcançar:<br>
+✔️ Mais leveza no dia a dia<br>
+✔️ Redução do sofrimento emocional<br>
+✔️ Aumento da autoestima e confiança<br>
+✔️ Mais qualidade de vida<br>
+
+✨ Você não precisa enfrentar tudo sozinho(a).<br>
+A psicoterapia é um investimento em você, no seu bem-estar e no seu futuro.<br>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseThree">
+        🗣️ FONOAUDIOLOGIA
+      </button>
+    </h2>
+
+    <div id="flush-collapseThree"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionFlushExample">
+
+      <div class="accordion-body">
+        A fonoaudiologia cuida da sua comunicação, audição e voz,
+promovendo mais qualidade de vida em todas 
+as fases da vida — do bebê ao idoso.<br>
+👂 Audição<br>
+
+Cuidar da audição é essencial para o desenvolvimento e bem-estar.<br>
+Realização de exames como o Teste da Orelhinha, fundamental para detectar<br>
+precocemente possíveis alterações auditivas em recém-nascidos.<br>
+
+Benefícios:<br>
+✔️ Diagnóstico precoce de problemas auditivos<br>
+✔️ Acompanhamento e reabilitação auditiva<br>
+✔️ Melhora na comunicação e interação social<br>
+✔️ Mais segurança no desenvolvimento infantil<br>
+
+🎤 Voz<br>
+
+Sua voz é uma ferramenta poderosa — e merece cuidado especial!<br>
+Tratamento para rouquidão constante, cansaço ao falar e aprimoramento<br>
+vocal, especialmente para quem usa a voz profissionalmente.<br>
+
+Indicado para:<br>
+✔️ Professores<br>
+✔️ Cantores<br>
+✔️ Palestrantes<br>
+✔️ Profissionais de atendimento<br>
+Benefícios:<br>
+✔️ Melhora da qualidade vocal<br>
+✔️ Redução de esforço e fadiga ao falar<br>
+✔️ Prevenção de lesões vocais<br>
+✔️ Mais confiança ao se comunicar<br>
+
+✨ Cuide da sua comunicação e da sua saúde!<br>
+A fonoaudiologia vai além da fala — ela transforma a forma como você se conecta com o mundo.<br>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseFour">
+        🥗 NUTRIÇÃO
+      </button>
+    </h2>
+
+    <div id="flush-collapseFour"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionFlushExample">
+
+      <div class="accordion-body">
+        A nutrição é essencial para manter o corpo saudável, prevenir
+doenças e melhorar sua qualidade de vida.
+ Com orientação profissional, você aprende a se alimentar de forma equilibrada e consciente,<br>
+respeitando suas necessidades e objetivos.<br>
+
+🍎 Gestão de Doenças<br>
+
+A alimentação adequada é uma grande aliada no tratamento econtrole de diversas condições de saúde.<br>
+Atuação em casos como:<br>
+✔️ Diabetes<br>
+✔️ Doenças cardíacas<br>
+✔️ Problemas digestivos e intestinais<br>
+Benefícios:<br>
+✔️ Controle dos níveis de glicose e colesterol<br>
+✔️ Redução de riscos de complicações<br>
+✔️ Mais energia e disposição no dia a dia<br>
+✔️ Melhora do funcionamento do organismo<br>
+
+🧠 Educação e Prevenção<br>
+
+Aprender a se alimentar bem é o primeiro passo para uma vida mais saudável.<br>
+Como a nutrição pode ajudar:<br>
+✔️ Reeducação alimentar personalizada<br>
+✔️ Prevenção de doenças como Obesidade e colesterol alto<br>
+✔️ Escolhas alimentares mais conscientes<br>
+✔️ Construção de hábitos saudáveis e duradouros<br>
+Resultados que você pode alcançar:<br>
+✔️ Mais qualidade de vida<br>
+✔️ Melhor desempenho físico e mental<br>
+✔️ Autoestima elevada<br>
+✔️ Bem-estar a longo prazo<br>
+
+✨ Cuide do seu corpo de dentro para fora!<br>
+A nutrição não é sobre restrição, é sobre equilíbrio, saúde e bem-estar.<br>
+      </div>
+    </div>
+  </div>
+
+</div>
+<br>
+<li>
+<footer class="container-fluid bg-light text-black py-5 mt-5">
+    
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+                <img src="h&h-banner.jpg"
+                     alt="Logo"
+                     class="rounded-circle img-fluid"
+                     style="width: 180px; height: 180px; object-fit: cover;">
+            </div>
+            <div class="col-md-9">
+                <h3>Entre em contato</h3>
+                <p>📍 Rua Avenida das Américas, 170 – Rio de Janeiro</p>
+                <p>📞 (21) 97326789</p>
+                <p><a href="#" class="link-dark">✉HealthyHealing@gmail.com</a></p>
+                <p>🕒 Ter a Dom — 08h às 21h</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</li>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+
+</script>
+
+</body>
+</html>

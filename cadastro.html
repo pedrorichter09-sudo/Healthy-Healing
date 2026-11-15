@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro - Clínica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f5f7fa; }
+        .cadastro-box {
+            max-width: 650px; margin: 60px auto; background: white;
+            padding: 40px; border-radius: 20px; box-shadow: 0 0 20px rgba(0, 0, 0, .08);
+        }
+        .logo {
+            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+            display: block; margin: auto; border: 3px solid #d6d6d6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="cadastro-box">
+        <div class="text-center mb-4">
+            <img src="banners/H&H-banner (2).png" alt="Logo da Clínica" class="logo mb-3">
+            <h2>Clínica - Healthy Healing</h2>
+            <p class="text-muted">Preencha os dados para criar sua conta</p>
+        </div>
+
+        <div id="alerta" class="alert alert-danger d-none" role="alert"></div>
+
+        <form id="formCadastro" action="cadastrar.php" method="POST">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="sobrenome" class="form-label">Sobrenome</label>
+                    <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="contato@clinica.com" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(21) 99999-9999" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="senha" class="form-label">Senha</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleSenha">🙈</button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="confirmarSenha" class="form-label">Confirmar senha</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarSenha">🙈</button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg w-100">Confirmar Cadastro</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Avisos de erro vindos do servidor (?erro=codigo)
+    const MENSAGENS = {
+        senhas: "As senhas não são iguais.",
+        senha_curta: "A senha precisa ter pelo menos 6 caracteres.",
+        cpf: "CPF inválido. Digite os 11 números.",
+        email_existe: "Esse e-mail já possui uma conta.",
+        cpf_existe: "Esse CPF já possui uma conta.",
+        banco: "Não foi possível salvar. Verifique se o MySQL do XAMPP está ligado."
+    };
+    const codigo = new URLSearchParams(location.search).get("erro");
+    if (codigo && MENSAGENS[codigo]) {
+        const alerta = document.getElementById("alerta");
+        alerta.textContent = MENSAGENS[codigo];
+        alerta.classList.remove("d-none");
+    }
+    // Mostrar / esconder senha
+    function alternar(idCampo, idBotao) {
+        const campo = document.getElementById(idCampo);
+        const botao = document.getElementById(idBotao);
+        botao.addEventListener("click", () => {
+            const oculto = campo.type === "password";
+            campo.type = oculto ? "text" : "password";
+            botao.textContent = oculto ? "🙉" : "🙈";
+        });
+    }
+    alternar("senha", "toggleSenha");
+    alternar("confirmarSenha", "toggleConfirmarSenha");
+
+    // Máscara do CPF
+    document.getElementById("cpf").addEventListener("input", e => {
+        let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+        v = v.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        e.target.value = v;
+    });
+
+    // Verificar se as senhas são iguais
+    document.getElementById("formCadastro").addEventListener("submit", e => {
+        if (document.getElementById("senha").value !== document.getElementById("confirmarSenha").value) {
+            e.preventDefault();
+            alert("As senhas não são iguais!");
+        }
+    });
+</script>
+</body>
+</html>

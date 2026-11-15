@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthy Healing | Agendar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --verde-escuro: #146c43; --verde: #308568; --verde-claro: #bdf3e2; }
+    body {
+      font-family: "Nunito", system-ui, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #308568, #bdf3e2) fixed;
+      color: #1f2d27;
+      padding: 40px 0;
+    }
+    .painel {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 10px 28px rgba(20, 108, 67, .22);
+    }
+    h1 { font-weight: 800; color: var(--verde-escuro); font-size: 1.8rem; }
+    .form-control:focus { border-color: var(--verde); box-shadow: 0 0 0 .2rem rgba(48,133,104,.25); }
+
+    .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: .6rem; }
+    .slot {
+      border: 2px solid var(--verde);
+      background: #fff;
+      color: var(--verde-escuro);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: .45rem 0;
+      transition: background .15s ease;
+    }
+    .slot:hover:not(:disabled) { background: var(--verde-claro); }
+    .slot.ativo { background: var(--verde-escuro); border-color: var(--verde-escuro); color: #fff; }
+    .slot:disabled {
+      border-color: #d4d9d7; background: #f1f3f2; color: #9aa5a0;
+      text-decoration: line-through; cursor: not-allowed;
+    }
+    .btn-agendar {
+      background: var(--verde-escuro); color: #fff; font-weight: 700;
+      border: 0; border-radius: 999px; padding: .7rem 2rem;
+    }
+    .btn-agendar:hover { background: var(--verde); color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <a href="select.html" class="text-decoration-none" style="color:var(--verde-escuro)">&larr; Voltar</a>
+    <h1 class="mt-2 mb-4">Agendar <span id="nomeEsp"></span></h1>
+
+    <div id="msg" role="alert"></div>
+
+    <form id="form" novalidate>
+      <div class="mb-4">
+        <label for="data" class="form-label fw-bold">1. Escolha o dia</label>
+        <input type="date" id="data" class="form-control" required>
+        <div class="form-text">Atendemos de terça a domingo.</div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-bold">2. Escolha o horário</label>
+        <div id="slots" class="slots"></div>
+        <p id="avisoSlots" class="text-muted small mb-0">Selecione um dia para ver os horários.</p>
+      </div>
+
+      <p class="text-muted mb-4">Agendando como <strong>{{ session['nome'] }}</strong>. <a href="/logout">Sair</a></p>
+
+      <button type="submit" class="btn btn-agendar">Confirmar agendamento</button>
+    </form>
+  </div>
+
+  <script>
+    const NOMES = {
+      psicoterapia: 'Psicoterapia', fisioterapia: 'Fisioterapia',
+      fonoaudiologia: 'Fonoaudiologia', nutricao: 'Nutrição'
+    };
+    const esp = new URLSearchParams(location.search).get('esp');
+    const $ = id => document.getElementById(id);
+    let horaEscolhida = null;
+
+    if (!NOMES[esp]) location.href = 'select.html';
+    $('nomeEsp').textContent = NOMES[esp];
+
+    const hoje = new Date().toLocaleDateString('sv-SE');
+    $('data').min = hoje;
+
+    function mostrar(texto, tipo) {
+      $('msg').className = 'alert alert-' + tipo;
+      $('msg').textContent = texto;
+    }
+    function limpar() { $('msg').className = ''; $('msg').textContent = ''; }
+
+    async function carregarHorarios() {
+      const data = $('data').value;
+      horaEscolhida = null;
+      $('slots').innerHTML = '';
+      limpar();
+      if (!data) return;
+
+      try {
+        const r = await fetch(`/api/horarios?esp=${esp}&data=${data}`);
+        const j = await r.json();
+        if (!r.ok) { $('avisoSlots').textContent = j.erro; return; }
+        $('avisoSlots').textContent = 'Horários riscados já foram reservados.';
+
+        j.horarios.forEach(h => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'slot';
+          b.textContent = h;
+          b.disabled = j.ocupados.includes(h);
+          b.onclick = () => {
+            horaEscolhida = h;
+            document.querySelectorAll('.slot').forEach(s => s.classList.remove('ativo'));
+            b.classList.add('ativo');
+          };
+          $('slots').appendChild(b);
+        });
+      } catch {
+        mostrar('Não foi possível conectar ao servidor.', 'danger');
+      }
+    }
+    $('data').addEventListener('change', carregarHorarios);
+
+    $('form').addEventListener('submit', async e => {
+      e.preventDefault();
+      limpar();
+      if (!$('data').value || !horaEscolhida) return mostrar('Escolha o dia e o horário.', 'warning');
+
+      try {
+        const r = await fetch('/api/agendamentos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            especialidade: esp,
+            data: $('data').value,
+            hora: horaEscolhida
+          })
+        });
+        if (r.status === 401) { location.href = '/login'; return; }
+        const j = await r.json();
+        if (r.ok) {
+          mostrar(`Agendamento confirmado: ${NOMES[esp]} em ${$('data').value.split('-').reverse().join('/')} às ${horaEscolhida}.`, 'success');
+          $('form').reset();
+          horaEscolhida = null;
+          $('slots').innerHTML = '';
+          $('avisoSlots').textContent = 'Selecione um dia para ver os horários.';
+        } else {
+          mostrar(j.erro, r.status === 409 ? 'warning' : 'danger');
+          if (r.status === 409) carregarHorarios(); // atualiza os horários ocupados
+        }
+      } catch {
+        mostrar('Não foi possível conectar ao servidor.', 'danger');
+      }
+    });
+  </script>
+</body>
+</html>

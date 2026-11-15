@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plano de Saúde - Healthy Healing</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{
+    background:#f5f7fa;
+}
+.Plano{
+    max-width:900px;
+    margin:50px auto;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,.08);
+}
+.titulo-secao{
+    border-bottom:2px solid #e9ecef;
+    padding-bottom:10px;
+    margin-bottom:20px;
+}
+.resultado{
+    display:none;
+}
+.logo{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:auto;
+    border:3px solid #d6d6d6;
+}
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Health Hearling</a>
+
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Início</a>
+        </li>
+
+    </div>
+  </div>
+</nav>
+<div class="container">
+<div class="Plano">
+<div class="text-center mb-5">
+    <img
+src="h&h-banner.jpg"
+alt="Logo da Clínica"
+class="logo mb-3">Healthy Healing Plano-Saúde </h2>
+    <p class="text-muted">Adicione o Titular e seu Dependente</p>
+</div>
+<form id="formPlano">
+<h4 class="titulo-secao">Titular</h4>
+<div class="row">
+<div class="col-md-8 mb-3">
+<label class="form-label">Nome Completo</label>
+<input
+type="text"
+class="form-control"
+id="titular">
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label">CPF</label>
+<input
+type="text"
+class="form-control"
+id="cpfTitular"
+placeholder="000.000.000-00">
+</div>
+</div>
+<h4 class="titulo-secao mt-4">Dependente</h4>
+<p class="text-muted">*opcional*</p>
+<div class="row">
+<div class="col-md-8 mb-3">
+<label class="form-label">Nome do Dependente</label>
+<input
+type="text"
+class="form-control"
+id="dependente">
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label">CPF</label>
+<input
+type="text"
+class="form-control"
+id="cpfDependente"
+placeholder="000.000.000-00">
+</div>
+</div>
+<div class="mb-4">
+<label class="form-label">
+Escolha o Plano
+</label>
+<select
+class="form-select"
+id="plano">
+<option value="plus">
+Healthy Healing Plus
+</option>
+</select>
+</div>
+<div class="d-grid">
+<button type="button"class="btn btn-success btn-lg"onclick="simular()">
+Finalizar
+</button>
+</div>
+<br>
+<a href="index.html"class="btn btn-outline-primary btn-lg w-100">Volte e agende seu horário</a>
+</form>
+<div
+class="resultado mt-5 alert alert-success"
+id="resultado"
+style="display:none;">
+</div>
+<script>
+function simular(){
+const nome =
+document.getElementById("titular").value;
+const dependente =
+document.getElementById("dependente").value;
+const plano =
+document.getElementById("plano");
+const numero =
+Math.floor(100000000000 +
+Math.random()*900000000000);
+document.getElementById("resultado").style.display="block";
+document.getElementById("resultado").innerHTML=`
+<h4>Carteirinha Digital</h4>
+<p><strong>Plano:</strong>${plano.options[plano.selectedIndex].text}</p>
+<p><strong>Titular:</strong>${nome}</p>
+<p><strong>Dependente:</strong>${dependente || "Nenhum"}</p>
+<p><strong>Nº Carteirinha:</strong>${numero}</p>
+`;
+}
+</script>
+</body>
+</html>

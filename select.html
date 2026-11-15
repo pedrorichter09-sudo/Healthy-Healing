@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthy Healing | Escolha seu atendimento</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-escuro: #146c43;
+      --verde: #308568;
+      --verde-claro: #bdf3e2;
+      --texto: #1f2d27;
+      --texto-suave: #5b6b64;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #308568, #bdf3e2) fixed;
+      color: #fff;
+    }
+
+    /* ===== NAVBAR PÍLULA ===== */
+    .navbar-pill {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(94%, 1000px);
+      padding: 8px 8px 8px 22px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      z-index: 1030;
+    }
+    .navbar-pill .container-fluid { padding: 0; }
+    .navbar-pill .navbar-brand { font-weight: 800; letter-spacing: -0.02em; }
+    .navbar-pill .nav-link { opacity: 0.9; font-weight: 600; }
+    .navbar-pill .nav-link:hover,
+    .navbar-pill .nav-link.active { opacity: 1; }
+    .navbar-pill .navbar-toggler { border: 0; }
+    .navbar-pill .navbar-toggler:focus { box-shadow: none; }
+    .navbar-pill .form-control { border-radius: 999px; border: 0; }
+    .navbar-pill .btn-buscar {
+      background: #fff;
+      color: var(--verde-escuro);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 6px 18px;
+      transition: transform .2s ease;
+    }
+    .navbar-pill .btn-buscar:hover { transform: scale(1.05); }
+
+    @media (max-width: 991.98px) {
+      .navbar-pill { border-radius: 28px; padding: 8px 12px 8px 20px; }
+      .navbar-pill form { padding: 8px 0 6px; }
+    }
+
+    /* ===== CABEÇALHO ===== */
+    main { padding: 130px 0 0; }
+
+    .intro {
+      text-align: center;
+      max-width: 40rem;
+      margin: 0 auto 2.5rem;
+      padding: 0 1rem;
+    }
+    .intro h1 {
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 14px rgba(20, 108, 67, .35);
+    }
+    .intro p {
+      font-size: 1.1rem;
+      margin: 0;
+      text-shadow: 0 1px 8px rgba(20, 108, 67, .35);
+    }
+
+    /* ===== CARDS DE ATENDIMENTO ===== */
+    .servico {
+      border: 0;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      background: #fff;
+      color: var(--texto);
+      box-shadow: 0 10px 28px rgba(20, 108, 67, .22);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .servico:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 38px rgba(20, 108, 67, .32);
+    }
+    .servico img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .servico .card-body {
+      display: flex;
+      flex-direction: column;
+      padding: 1.4rem;
+    }
+    .servico .card-title { font-weight: 800; color: var(--verde-escuro); }
+    .servico .card-text { color: var(--texto-suave); margin-bottom: 1.25rem; }
+
+    .btn-agende {
+      margin-top: auto;
+      background: var(--verde-escuro);
+      color: #fff;
+      font-weight: 700;
+      border: 0;
+      border-radius: 999px;
+      padding: .6rem 1.2rem;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .btn-agende:hover { background: var(--verde); color: #fff; transform: scale(1.03); }
+    .btn-agende:focus-visible { outline: 3px solid var(--verde-claro); outline-offset: 2px; }
+
+    /* ===== SEPARADOR ===== */
+    .separador {
+      max-width: 1000px;
+      margin: 4rem auto 0;
+      padding: 0 1rem;
+    }
+    .separador .aviso {
+      background: rgba(255, 255, 255, .28);
+      border: 1px solid rgba(255, 255, 255, .5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: .8rem 1.5rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--verde-escuro);
+      margin: 0;
+    }
+
+    /* ===== RODAPÉ / CONTATO ===== */
+    .contato {
+      max-width: 1000px;
+      margin: 2rem auto 3rem;
+      padding: 2rem;
+      background: #fff;
+      color: var(--texto);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 28px rgba(20, 108, 67, .22);
+    }
+    .contato h2 { font-weight: 800; color: var(--verde-escuro); margin-bottom: 1rem; }
+    .contato p { margin-bottom: .5rem; }
+    .contato .logo {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border: 4px solid var(--verde-claro);
+    }
+    .contato a { color: var(--verde-escuro); font-weight: 600; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .servico, .btn-agende, .navbar-pill .btn-buscar { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-pill">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Healthy Healing</a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Início</a>
+          </li>
+          <li class="nav-item" data-logado hidden>
+            <a class="nav-link" href="/perfil">Meu perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="plano-saude.html">Plano</a>
+          </li>
+        </ul>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+          <button class="btn btn-buscar" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="intro">
+      <h1>Escolha seu atendimento</h1>
+      <p>Selecione a especialidade e agende o seu horário.</p>
+    </header>
+
+    <section class="container" aria-label="Especialidades">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-4">
+
+        <div class="col">
+          <div class="card servico h-100">
+            <img src="cards/psicoterapia nova-card.png" alt="Psicologia">
+            <div class="card-body">
+              <h5 class="card-title">Psicoterapia</h5>
+              <p class="card-text">Atendimento psicológico com foco no bem-estar e qualidade de vida.</p>
+              <a href="agendar.html?esp=psicoterapia" class="btn btn-agende">Agende</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card servico h-100">
+            <img src="cards/fisio-card.jpg" alt="Fisioterapia">
+            <div class="card-body">
+              <h5 class="card-title">Fisioterapia</h5>
+              <p class="card-text">Tratamentos para recuperação e desempenho físico.</p>
+              <a href="agendar.html?esp=fisioterapia" class="btn btn-agende">Agende</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card servico h-100">
+            <img src="cards/FONOAUDIOLOGIA-NOVO.png" alt="Fonoaudiologia">
+            <div class="card-body">
+              <h5 class="card-title">Fonoaudiologia</h5>
+              <p class="card-text">Avaliação e acompanhamento especializado.</p>
+              <a href="agendar.html?esp=fonoaudiologia" class="btn btn-agende">Agende</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card servico h-100">
+            <img src="cards/nutri-card novo .png" alt="Nutrição">
+            <div class="card-body">
+              <h5 class="card-title">Nutrição</h5>
+              <p class="card-text">Orientação alimentar personalizada para seus objetivos.</p>
+              <a href="agendar.html?esp=nutricao" class="btn btn-agende">Agende</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="separador">
+      <h3 class="aviso">Mais informações abaixo</h3>
+    </div>
+
+    <footer class="contato container">
+      <div class="row align-items-center g-4">
+        <div class="col-md-3 text-center">
+          <img src="banners/H&H-banner (2).png" alt="Logo Healthy Healing" class="rounded-circle img-fluid logo">
+        </div>
+        <div class="col-md-9">
+          <h2>Entre em contato</h2>
+          <p>📍 Rua Avenida das Américas, 170 – Rio de Janeiro</p>
+          <p>📞 (21) 97326789</p>
+          <p>✉ <a href="mailto:HealthyHealing@gmail.com">HealthyHealing@gmail.com</a></p>
+          <p class="mb-0">🕒 Ter a Dom — 08h às 21h</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Pergunta ao servidor se há alguém logado. Se o servidor não responder
+    // (ex.: página aberta pela prévia do VS Code), mostra a versão de visitante.
+    function aplicarLogin(logado, nome) {
+      document.querySelectorAll('[data-logado]').forEach(e => e.hidden = !logado);
+      document.querySelectorAll('[data-visitante]').forEach(e => e.hidden = logado);
+      const campo = document.getElementById('nomeUsuario');
+      if (campo) campo.textContent = nome || '';
+    }
+    fetch('/api/me')
+      .then(r => r.json())
+      .then(d => aplicarLogin(d.logado, d.nome))
+      .catch(() => aplicarLogin(false, ''));
+  </script>
+</body>
+</html>
